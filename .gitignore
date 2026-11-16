@@ -1,0 +1,37 @@
+# Keil / ARM build output in any directory
+*.o
+*.d
+*.crf
+*.axf
+*.elf
+*.hex
+*.bin
+*.map
+*.lst
+*.lnp
+*.dep
+
+# Keil-generated linker reports and scatter files
+# Keep any hand-written scatter scripts explicitly tracked.
+*.htm
+*.sct
+
+# Keil per-user window layout
+*.uvguix.*
+
+# STM32CubeMX generation cache
+.mxproject
+
+# Logs, temporary files and backups
+*.log
+*.log.*
+*.tmp
+*.bak
+*~
+
+# Windows metadata
+Thumbs.db
+desktop.ini
+
+
+#
