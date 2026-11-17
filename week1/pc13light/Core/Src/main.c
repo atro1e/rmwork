@@ -20,7 +20,6 @@
 #include "main.h"
 #include "stm32f103xb.h"
 #include "stm32f1xx_hal_gpio.h"
-#include "stm32f1xx_hal_tim.h"
 #include "tim.h"
 #include "gpio.h"
 
@@ -178,6 +177,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   Instance: 指向具体的硬件定时器
   TogglePin: 翻转 GPIO 引脚电平
   */
+}
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  if (GPIO_Pin == GPIO_PIN_8){
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_5);
+  }
+
 }
 
 /* USER CODE END 4 */
