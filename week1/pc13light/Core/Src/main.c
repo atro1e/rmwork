@@ -18,8 +18,11 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "gpio.h"
+#include "stm32f103xb.h"
 #include "stm32f1xx_hal_gpio.h"
+#include "stm32f1xx_hal_tim.h"
+#include "tim.h"
+#include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -87,7 +90,11 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
+
+  HAL_TIM_Base_Start_IT(&htim2);  //启用tim2的定时器
+
 
   /* USER CODE END 2 */
 
@@ -95,10 +102,19 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
+    /***********************
+    这是使用hal_delay的点灯
+    ***********************/
 		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_RESET);
-		HAL_Delay(500);
+		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,GPIO_PIN_SET);
+		HAL_Delay(250);
 		HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,GPIO_PIN_SET);
-    HAL_Delay(500);
+		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,GPIO_PIN_RESET);
+    HAL_Delay(250);
+
+
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -146,6 +162,23 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  if (htim ->Instance == TIM2) {
+    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_12);
+  }
+  /*
+  htim:H是句柄 Handle 理解为"软件管理档案"
+  tim Timer
+  toggiepin:反转电平
+
+  更专业的说法:
+  htim: Timer Handle（定时器句柄）的缩写
+  Instance: 指向具体的硬件定时器
+  TogglePin: 翻转 GPIO 引脚电平
+  */
+}
 
 /* USER CODE END 4 */
 
