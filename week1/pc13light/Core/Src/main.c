@@ -19,9 +19,11 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f103xb.h"
+#include "stm32f1xx_hal.h"
 #include "stm32f1xx_hal_gpio.h"
 #include "tim.h"
 #include "gpio.h"
+#include <stdint.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -180,10 +182,18 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 }
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  if (GPIO_Pin == GPIO_PIN_8){
-    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_5);
-  }
+  static uint32_t bool_first_push = 0; //0 == no,1 == yes
+  static uint32_t initime = 0; //在程序启动阶段初始化的，通常发生在进入 main()之前  之后就不会重复赋值 static特性
 
+  uint32_t nowtime = HAL_GetTick();
+
+  if (GPIO_Pin == GPIO_PIN_8) {
+    if (nowtime - initime >= 20 || bool_first_push == 0) {
+      HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_5);
+      bool_first_push = 1;
+      initime = nowtime;
+    }
+  }
 }
 
 /* USER CODE END 4 */
