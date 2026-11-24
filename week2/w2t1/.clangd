@@ -1,0 +1,19 @@
+CompileFlags:
+  CompilationDatabase: MDK-ARM/build/w2t1
+  Add:
+    - --target=arm-none-eabi
+    - -mcpu=cortex-m3
+    - -mthumb
+    - -std=c99
+    - -isystem
+    - C:/Users/atroie/AppData/Local/Keil_v5/ARM/ARMCLANG/include
+  Remove:
+    - --apcs=*
+    - --cpu
+    - Cortex-M3
+    - --li
+    - --c99
+    - --split_sections
+    - --diag_suppress=*
+    - --no_depend_system_headers
+    - --depend
