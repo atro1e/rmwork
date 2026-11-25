@@ -1,0 +1,49 @@
+# Managed by keil-clangd (keep this line for auto-sync)
+# Source: MDK-ARM/pc13light.uvprojx | Target: pc13light | Device: STM32F103C8 | CPU: Cortex-M3
+CompileFlags:
+  CompilationDatabase: None
+  Remove:
+    - --target=*
+  Add:
+    - '--target=arm-none-eabi'
+    - '-mcpu=cortex-m3'
+    - '-mthumb'
+    - '-nostdinc'
+    - '-Id:/rm/rmwork/week1/pc13light/Core/Inc'
+    - '-Id:/rm/rmwork/week1/pc13light/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy'
+    - '-Id:/rm/rmwork/week1/pc13light/Drivers/STM32F1xx_HAL_Driver/Inc'
+    - '-Id:/rm/rmwork/week1/pc13light/Drivers/CMSIS/Device/ST/STM32F1xx/Include'
+    - '-Id:/rm/rmwork/week1/pc13light/Drivers/CMSIS/Include'
+    - '-Id:/rm/rmwork/week1/pc13light/MDK-ARM/RTE/_pc13light'
+    - '-DUSE_HAL_DRIVER'
+    - '-DSTM32F103xB'
+    - '-D__packed=__attribute__((packed))'
+    - '-D__align(x)=__attribute__((aligned(x)))'
+    - '-D__irq='
+    - '-D__svc(x)='
+    - '-D__value_in_regs='
+    - '-D__pure='
+    - '-D__writeonly='
+    - '-Wno-unknown-pragmas'
+    - '-Wno-unused-command-line-argument'
+---
+If:
+  PathMatch: .*\.[ch]$
+CompileFlags:
+  Add:
+    - '-xc'
+    - '-std=gnu99'
+    - '-isystem'
+    - 'C:/Users/atroie/AppData/Local/Keil_v5/ARM/ARMCLANG/include'
+---
+If:
+  PathMatch: .*\.(cpp|cc|cxx|hpp|hh|hxx)$
+CompileFlags:
+  Add:
+    - '-std=gnu++17'
+    - '-D__ARMCOMPILER_LIBCXX=1'
+    - '-D__ARMCOMPILER_VERSION=6240000'
+    - '-isystem'
+    - 'C:/Users/atroie/AppData/Local/Keil_v5/ARM/ARMCLANG/include/libcxx'
+    - '-isystem'
+    - 'C:/Users/atroie/AppData/Local/Keil_v5/ARM/ARMCLANG/include'
